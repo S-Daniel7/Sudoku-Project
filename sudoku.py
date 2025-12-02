@@ -1,4 +1,4 @@
-python3 sudoku.py
+
 import pygame
 import sys
 from board import Board
@@ -9,7 +9,7 @@ pygame.init()
 WIDTH = 540
 HEIGHT = 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Sudoku Game")
+pygame.display.set_caption("Sudoku Game!")
 
 # colors
 WHITE = (255, 255, 255)
@@ -28,7 +28,7 @@ def draw_button(text, x, y, w, h):
                         y + h//2 - label.get_height()//2))
     return pygame.Rect(x, y, w, h)
 
-# start Screen
+# start screen
 
 def start_screen():
     SCREEN.fill(WHITE)
@@ -39,9 +39,9 @@ def start_screen():
     SCREEN.blit(title, (WIDTH//2 - title.get_width()//2, 90))
 
     # buttons
-    easy_btn   = draw_button("Easy",   170, 200, 200, 50)
-    med_btn    = draw_button("Medium", 170, 280, 200, 50)
-    hard_btn   = draw_button("Hard",   170, 360, 200, 50)
+    easy_btn = draw_button("Easy",   170, 200, 200, 50)
+    med_btn = draw_button("Medium", 170, 280, 200, 50)
+    hard_btn = draw_button("Hard",   170, 360, 200, 50)
 
     pygame.display.update()
 
@@ -141,10 +141,10 @@ def play_game(difficulty):
                         i, k = cell_pos
                         board.select(i, k)
 
-            # Keyboard
+
             if event.type == pygame.KEYDOWN:
 
-                # clear with backspace
+                # backspace clear
                 if event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     board.clear()
 
@@ -152,20 +152,20 @@ def play_game(difficulty):
                 if pygame.K_1 <= event.key <= pygame.K_9:
                     value = event.key - pygame.K_0
 
-                    # SHIFT = sketch (small number)
+                    # shift = sketch 
                     if pygame.key.get_mods() & pygame.KMOD_SHIFT:
                         board.sketch(value)
                     else:
                         board.place_number(value)
 
-                # ENTER to submit sketched number
+                # submitting sketched number
                 if event.key == pygame.K_RETURN:
                     if board.selected:
                         i, k = board.selected
                         if board.cells[i][k].sketched_value != 0:
                             board.place_number(board.cells[i][k].sketched_value)
 
-        # After moves, check if puzzle is finished
+        # to check if the puzzle is finished, return win or lose
         if board.is_full():
             correct = board.check_board()
             return "win" if correct else "lose"
