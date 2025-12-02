@@ -1,4 +1,4 @@
-#python3 sudoku.py
+python3 sudoku.py
 import pygame
 import sys
 from board import Board
