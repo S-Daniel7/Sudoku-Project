@@ -41,12 +41,22 @@ class Cell:
 
         pygame.draw.rect(self.screen, outline_color,(x, y, cell_size, cell_size), thickness)
 
+        #font colors
+        light_gray = (150, 150, 150)
+        dark_blue = (30, 50, 100)
+
         if self.value != 0: #draws real value (bigger font)
             font = pygame.font.Font(None, 40)
-            text = font.render(str(self.value), True, black)
+            #different colors if given or user input
+            if self.given:
+                color = dark_blue
+            else:
+                color = black
+
+            text = font.render(str(self.value), True, color)
             self.screen.blit(text, (x + 22, y + 18))
 
         elif self.value == 0 and self.sketched_value != 0: #draws sketched value (smaller font)
-            font = pygame.font.Font(None, 20)
-            text = font.render(str(self.sketched_value), True, black)
+            font = pygame.font.Font(None, 25)
+            text = font.render(str(self.sketched_value), True, light_gray)
             self.screen.blit(text, (x + 5, y + 5))

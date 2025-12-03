@@ -35,6 +35,7 @@ class Board:
             for k in range(9):
                 value = self.board[i][k]
                 cell = Cell(value, i, k, screen)
+                cell.given = (value != 0)
                 row_cells.append(cell)
             self.cells.append(row_cells)
 
