@@ -5,14 +5,9 @@ import pygame
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
 https://www.geeksforgeeks.org/program-sudoku-generator/
-
 """
 
 class SudokuGenerator:
-
-
-
-
     '''
 	create a sudoku board - initialize class variables and set up the 2D board
 	This should initialize:
@@ -29,7 +24,6 @@ class SudokuGenerator:
 	None
     '''
 
-
     def __init__(self, row_length, removed_cells):
         self.row_length = 9
         self.removed_cells = removed_cells
@@ -39,8 +33,6 @@ class SudokuGenerator:
             self.board.append([0]*self.row_length)
 
         self.box_length = int(math.sqrt(self.row_length))
-
-
 
     '''
 	Returns a 2D python list of numbers which represents the board
@@ -71,7 +63,7 @@ class SudokuGenerator:
 	
 	Return: boolean
     '''
-     def valid_in_row(self, row, num):
+    def valid_in_row(self, row, num):
         return num not in self.board[row]
 
     '''
@@ -85,8 +77,8 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-		for i in range(self.row_length):
-        	if self.board[i][col] == num:
+        for i in range(self.row_length):
+            if self.board[i][col] == num:
                 return False
         return True
 
