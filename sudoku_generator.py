@@ -133,6 +133,11 @@ class SudokuGenerator:
         numbers = list(range(1,10))
         random.shuffle(numbers)
         iden = 0
+
+        for i in range(row_start, row_start + self.box_length):
+            for j in range(col_start, col_start + self.box_length):
+                self.board[i][j] = numbers[iden]
+                iden +=1
     
     '''
     Fills the three boxes along the main diagonal of the board
@@ -142,7 +147,9 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_diagonal(self):
-        pass
+        self.fill_box(0,0)
+        self.fill_box(3, 3)
+        self.fill_box(6, 6)
 
     '''
     DO NOT CHANGE
