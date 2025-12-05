@@ -1,8 +1,7 @@
 #Board: This class represents an entire Sudoku board. A Board object has 81 Cell objects.
-
 import pygame
 from cell import Cell
-from sudoku_generator import generate_sudoku
+from sudoku_generator import SudokuGenerator
 
 class Board:
     def __init__(self, width, height, screen, difficulty):
@@ -21,7 +20,11 @@ class Board:
             removed = 50
 
         # make sudoku puzzle
-        self.board = generate_sudoku(9, removed)
+        generator = SudokuGenerator(9, removed)
+        generator.fill_values()  #create full solution first
+        self.solution = [row[:] for row in generator.board]  #store solution
+        generator.remove_cells()  #now remove puzzle numbers
+        self.board = generator.get_board()  #final puzzle
         self.original = [row[:] for row in self.board]  # saved copy for reset
 
         # prepare cell objects
@@ -173,11 +176,9 @@ class Board:
     def check_board(self):
         # check rows
         for i in range(9):
-            used = set()
             for k in range(9):
-                v = self.cells[i][k].value
-                if v < 1 or v > 9 or v in used:
+                if self.cells[i][k].value != self.solution[i][k]:
                     return False
-                used.add(v)
+        return True
 
        
